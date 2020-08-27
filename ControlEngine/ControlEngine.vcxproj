@@ -99,15 +99,15 @@
     <LinkIncremental>true</LinkIncremental>
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
-    <IncludePath>C:\bin\protoc-3.4.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\bin\protoc-3.4.0\bin\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\x86\debug\</OutDir>
     <IntDir>$(SolutionDir)\build\x86\debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\bin\protoc-3.4.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\bin\protoc-3.4.0\bin\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\x64\debug\</OutDir>
     <IntDir>$(SolutionDir)\build\x64\debug\</IntDir>
   </PropertyGroup>
@@ -115,15 +115,15 @@
     <LinkIncremental>false</LinkIncremental>
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
-    <IncludePath>C:\bin\protoc-3.4.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\bin\protoc-3.4.0\bin\release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\x86\release\</OutDir>
     <IntDir>$(SolutionDir)\build\x86\release\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\bin\protoc-3.4.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\bin\protoc-3.4.0\bin\release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\x64\release\</OutDir>
     <IntDir>$(SolutionDir)\build\x64\release\</IntDir>
   </PropertyGroup>
@@ -194,7 +194,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc\; C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\;C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\C\lib64\msvc\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\C\lib32\msvc\</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;NIDAQmx.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
