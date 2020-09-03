@@ -3,7 +3,7 @@
 #include "socket_sender.h"
 #include "socket_listener.h"
 
-ServerSocket::ServerSocket() {
+ServerSocket::ServerSocket(std::string cfgFile) {
 	ListenSocket = INVALID_SOCKET;
 	ClientSocket = INVALID_SOCKET;
 	recvbuflen = DEFAULT_BUFLEN;
@@ -11,6 +11,7 @@ ServerSocket::ServerSocket() {
 	result = NULL;
 	sender = NULL;
 	listener = NULL;
+	_cfgFile = cfgFile;
 }
 
 bool ServerSocket::sendStatus(std::string status)
@@ -118,7 +119,7 @@ void ServerSocket::m_ThreadFunc() {
 
 			// Setup the socket sender and listener
 			sender = new SocketSender(ClientSocket);
-			listener = new SocketListener(ClientSocket);
+			listener = new SocketListener(ClientSocket, _cfgFile);
 			listener->setSender(sender);
 			listener->start();
 		}

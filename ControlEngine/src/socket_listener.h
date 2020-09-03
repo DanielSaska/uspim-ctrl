@@ -23,7 +23,7 @@ protected:
 
 	spim::InstructionHandler * _instructionHandler;
 public:
-	SocketListener(SOCKET socket);
+	SocketListener(SOCKET socket, std::string cfgFile);
 	void setSender(SocketSender* sender);
 	void m_ThreadFunc();
 	void start() {

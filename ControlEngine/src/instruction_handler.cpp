@@ -5,6 +5,9 @@
 #include "socket_sender.h"
 #include "spim_daq.h"
 
+#include <fstream>
+#include <map>
+
 void spim::InstructionHandler::handleInstruction(std::string instruction)
 {
 	// If the main execution thread exists, is joinable and the task on said thread has finished
@@ -26,12 +29,71 @@ void spim::InstructionHandler::handleInstruction(std::string instruction)
 	}
 }
 
-spim::InstructionHandler::InstructionHandler()
+spim::InstructionHandler::InstructionHandler(std::string cfgFile)
 	: thr(nullptr)
-	, _daqCommander(new DaqCommander())
 	, _auxConsumer(nullptr)
 	, _slavedone(true)
 {
+	std::map<std::string, std::string> cfg {
+		{"dev", "Dev1"},
+		{"xMirror1Channel", "AO0"},
+		{"xMirror2Channel", "AO1"},
+		{"laser1Channel", "AO2"},
+		{"laser2Channel", "AO3"},
+		{"zMirror1Channel", "AO4"},
+		{"zMirror2Channel", "AO5"},
+		{"pifocChannel", "AO6"},
+		{"shutterChannel", "AO7"},
+
+		{"counterSource", "Ctr0InternalOutput"},
+		{"triggerSource", "PFI0"},
+		{"counterChannel", "Ctr0"},
+		{"clockSignalChannel", "Ctr1"},
+		{"clockSignalTerminal", "PFI1" }
+	};
+
+	try {
+		std::ifstream cfgF(cfgFile);
+		std::string cfgStr((std::istreambuf_iterator<char>(cfgF)), std::istreambuf_iterator<char>());
+		json jCfg = json::parse(cfgStr);
+		for (auto & it : cfg)
+		{
+			try {
+				it.second = jCfg.at(it.first).get<std::string>();
+			}
+			catch (std::exception e) {} //Just ignore anything we did not find in the config file
+		}
+	}
+	catch (std::exception e) {
+		std::cout << "Error reading config file" << std::endl;
+		std::cout << "Press any key to exit...";
+		std::cin.ignore();
+		std::cin.get();
+	}
+
+#if _DEBUG
+	std::cout << "DAQ Conifguration:" << std::endl;
+	for (auto const& it : cfg)
+	{
+		std::cout << it.first << "=" << it.second << std::endl;
+	}
+#endif
+
+	_daqCommander = new DaqCommander( true, 600.0f, false
+		, "/" + cfg["dev"] + "/" + cfg["xMirror1Channel"]
+		, "/" + cfg["dev"] + "/" + cfg["xMirror2Channel"]
+		, "/" + cfg["dev"] + "/" + cfg["laser1Channel"]
+		, "/" + cfg["dev"] + "/" + cfg["laser2Channel"]
+		, "/" + cfg["dev"] + "/" + cfg["zMirror1Channel"]
+		, "/" + cfg["dev"] + "/" + cfg["zMirror2Channel"]
+		, "/" + cfg["dev"] + "/" + cfg["pifocChannel"]
+		, "/" + cfg["dev"] + "/" + cfg["shutterChannel"]
+		, "/" + cfg["dev"] + "/" + cfg["counterSource"]
+		, "/" + cfg["dev"] + "/" + cfg["triggerSource"]
+		, "/" + cfg["dev"] + "/" + cfg["counterChannel"]
+		, "/" + cfg["dev"] + "/" + cfg["clockSignalChannel"]
+		, "/" + cfg["dev"] + "/" + cfg["clockSignalTerminal"] );
+
 	_daqCommander->setTriggerOut(false);
 	_daqCommander->setRate(1);
 	_daqCommander->setFrequency(1,1);

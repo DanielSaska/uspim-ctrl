@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <atomic>
+#include <string>
 #include "normal_mode_controller.h"
 #include "spim_daq.h"
 #include "instruction_consumer.h"
@@ -14,7 +15,7 @@ namespace spim
 	{
 	public:
 		///Setup
-		InstructionHandler();
+		InstructionHandler(std::string cfgFile);
 
 		///Handles instructions that are to be executed on the main execution thraed
 		void handleInstruction(std::string instruction); 

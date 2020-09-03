@@ -20,14 +20,30 @@
 #include <windows.h>
 
 #include <cstdlib> 
+#include <fstream>
 
 using json = nlohmann::json;
 
 ServerSocket * serverSocket = nullptr;
+
+inline bool fexists(const std::string& name) {
+	std::ifstream f(name.c_str());
+	return f.good();
+}
+
 int main(int argc, char* argv[])
 {
+	std::string cfgDefault = "{\n\t\"dev\": \"Dev1\",\n\n\t\"xMirror1Channel\": \"AO0\",\n\t\"xMirror2Channel\": \"AO1\",\n\t\"laser1Channel\": \"AO2\",\n\t\"laser2Channel\": \"AO3\",\n\t\"zMirror1Channel\": \"AO4\",\n\t\"zMirror2Channel\": \"AO5\",\n\t\"pifocChannel\": \"AO6\",\n\t\"shutterChannel\": \"AO7\",\n\n\t\"counterSource\": \"Ctr0InternalOutput\",\n\t\"triggerSource\": \"PFI0\",\n\t\"counterChannel\": \"Ctr0\",\n\t\"clockSignalChannel\": \"Ctr1\",\n\t\"clockSignalTerminal\": \"PFI1\"\n}";
+	std::string cfgFile = "./cfg.json";
+	if (!fexists(cfgFile)) {
+		std::ofstream out(cfgFile);
+		out << cfgDefault;
+		out.close();
+	}
+
+
 	// Start server socket listener
-	serverSocket = new ServerSocket();  //Create TCP server
+	serverSocket = new ServerSocket(cfgFile);  //Create TCP server
 	serverSocket->start(); //Start the server
 	serverSocket->join(); //Wait for it to finish (never)
 	delete serverSocket; //And cleanup

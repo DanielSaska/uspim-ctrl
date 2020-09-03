@@ -1,0 +1,18 @@
+{
+	"dev": "Dev1",
+
+	"xMirror1Channel": "AO0",
+	"xMirror2Channel": "AO1",
+	"laser1Channel": "AO2",
+	"laser2Channel": "AO3",
+	"zMirror1Channel": "AO4",
+	"zMirror2Channel": "AO5",
+	"pifocChannel": "AO6",
+	"shutterChannel": "AO7",
+
+	"counterSource": "Ctr0InternalOutput",
+	"triggerSource": "PFI0",
+	"counterChannel": "Ctr0",
+	"clockSignalChannel": "Ctr1",
+	"clockSignalTerminal": "PFI1"
+}

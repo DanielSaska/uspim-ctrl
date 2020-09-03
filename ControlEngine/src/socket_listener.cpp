@@ -1,9 +1,9 @@
 #include "socket_listener.h"
 #include "instruction_handler.h"
 
-SocketListener::SocketListener(SOCKET socket)
+SocketListener::SocketListener(SOCKET socket, std::string cfgFile)
 	: thr( nullptr )
-	, _instructionHandler( new spim::InstructionHandler() )
+	, _instructionHandler( new spim::InstructionHandler(cfgFile) )
 {
 	recvbuflen = DEFAULT_BUFLEN;
 	this->ClientSocket = socket;

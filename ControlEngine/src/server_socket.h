@@ -3,6 +3,7 @@
 #include <ws2tcpip.h>
 #include <winnetwk.h>
 #include <mutex>
+#include <string>
 
 #include <thread>
 //#include "socket_listener.h"
@@ -24,9 +25,10 @@ protected:
 	SocketSender* sender;
 	SocketListener* listener;
 	std::thread thr;
+	std::string _cfgFile;
 
 public:
-	ServerSocket();
+	ServerSocket(std::string cfgFile);
 
 	bool sendStatus(std::string status);
 	bool sendCustom(std::string msg);

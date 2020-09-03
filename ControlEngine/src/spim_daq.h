@@ -23,18 +23,18 @@ namespace spim
 			( bool countFramesInternally = true
 			, float repositionSpeed = 600 //um/s
 			, bool edge = 0 //0=Rising, 1=Falling
-			, std::string xMirror1Channel = "Dev1/ao15"
-			, std::string xMirror2Channel = "Dev1/ao14"
-			, std::string laser1Channel = "Dev1/ao17"
-			, std::string laser2Channel = "Dev1/ao19"
-			, std::string zMirror1Channel = "Dev1/ao21"
-			, std::string zMirror2Channel = "Dev1/ao23"
-			, std::string pifocChannel = "Dev1/ao13"
-			, std::string shutterChannel = "Dev1/ao12"
+			, std::string xMirror1Channel = "/Dev1/AO0"
+			, std::string xMirror2Channel = "/Dev1/AO1"
+			, std::string laser1Channel = "/Dev1/AO2"
+			, std::string laser2Channel = "/Dev1/AO3"
+			, std::string zMirror1Channel = "/Dev1/AO4"
+			, std::string zMirror2Channel = "/Dev1/AO5"
+			, std::string pifocChannel = "/Dev1/AO6"
+			, std::string shutterChannel = "/Dev1/AO7"
 			, std::string counterSource = "/Dev1/Ctr0InternalOutput"
 			, std::string triggerSource = "/Dev1/PFI0"
-			, std::string counterChannel = "/Dev1/ctr0"
-			, std::string clockSignalChannel = "/Dev1/ctr1"
+			, std::string counterChannel = "/Dev1/Ctr0"
+			, std::string clockSignalChannel = "/Dev1/Ctr1"
 			, std::string clockSignalTerminal = "/Dev1/PFI1"
 			);
 		~DaqCommander();
